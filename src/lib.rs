@@ -1,6 +1,3 @@
-use std::ffi::OsString;
-use std::path::PathBuf;
-
 use clap::{Command, arg};
 
 pub fn cli() -> Command {
