@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use clap::{Command, arg};
 
 pub fn cli() -> Command {
@@ -15,5 +17,11 @@ pub fn cli() -> Command {
                         .required(false)
                         .default_value("."),
                 ),
+        )
+        .subcommand(
+            Command::new("add")
+                .about("Add files and folders to your staging area")
+                .long_about("Add your files from your local area to staging area. Use it wisely because this has been made in a hurry by Cavin without any sort of AI tools (Yes, people still do coding without ai)")
+                .arg(arg!(<PATH> "Stuff to add").value_parser(clap::value_parser!(PathBuf))),
         )
 }
