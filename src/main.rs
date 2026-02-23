@@ -46,6 +46,34 @@ fn main() {
             println!("Your amazing repository has been initialized successfully");
         }
 
+        Some(("add", sub_matches)) => {
+            let git_path: PathBuf =
+                get_current_working_dir().unwrap_or_else(|_| PathBuf::from("."));
+
+            let git_dir = git_path.join(".rugit");
+
+            if git_dir.exists() {
+                let paths = sub_matches
+                    .get_many::<PathBuf>("PATH")
+                    .into_iter()
+                    .flatten()
+                    .collect::<Vec<_>>();
+                println!("Adding {paths:?}");
+
+                let file_path = git_path.join(paths.first().expect("Path is not provided"));
+                match file_path.exists() {
+                    true => println!("File is present sir!"),
+                    false => {
+                        println!("Bro could you please check the spelling while defining file")
+                    }
+                }
+            } else {
+                println!(
+                    "You've not initialized the repository. Brother you should learn git before using it"
+                )
+            }
+        }
+
         Some((ext, sub_matches)) => {
             let args = sub_matches
                 .get_many::<OsString>("")
@@ -54,7 +82,6 @@ fn main() {
                 .collect::<Vec<_>>();
             println!("Calling out to {ext:?} with {args:?}");
         }
-
         _ => unreachable!(),
     }
 }
