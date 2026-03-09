@@ -1,9 +1,8 @@
+use clap::ArgMatches;
 use std::fs::File;
 use std::io::Write;
 use std::path::PathBuf;
 use std::{env, fs, io};
-
-use clap::ArgMatches;
 
 pub struct Repository {}
 
