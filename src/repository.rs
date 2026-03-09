@@ -7,11 +7,15 @@ use std::{env, fs, io};
 pub struct Repository {}
 
 impl Repository {
+    pub fn new() -> Self {
+        Repository {}
+    }
+
     pub fn get_current_working_dir() -> io::Result<PathBuf> {
         env::current_dir()
     }
 
-    pub fn init() -> bool {
+    pub fn init(&self) -> bool {
         let git_path: PathBuf =
             Self::get_current_working_dir().unwrap_or_else(|_| PathBuf::from("."));
 
@@ -44,7 +48,7 @@ impl Repository {
         return true;
     }
 
-    pub fn add(sub_matches: &ArgMatches) {
+    pub fn add(&self, sub_matches: &ArgMatches) {
         let root_path: PathBuf =
             Self::get_current_working_dir().unwrap_or_else(|_| PathBuf::from("."));
 

@@ -7,14 +7,15 @@ use repository::Repository;
 
 fn main() {
     let matches = cli().get_matches();
+    let repository = Repository::new();
 
     match matches.subcommand() {
         Some(("init", _sub_matches)) => {
-            Repository::init();
+            repository.init();
         }
 
         Some(("add", sub_matches)) => {
-            Repository::add(sub_matches);
+            repository.add(sub_matches);
         }
 
         Some((ext, sub_matches)) => {
