@@ -22,6 +22,8 @@ pub fn cli() -> Command {
             Command::new("add")
                 .about("Add files and folders to your staging area")
                 .long_about("Add your files from your local area to staging area. Use it wisely because this has been made in a hurry by Cavin without any sort of AI tools (Yes, people still do coding without ai)")
-                .arg(arg!(<PATH> "Stuff to add").value_parser(clap::value_parser!(PathBuf))),
+                .arg(
+                    arg!(<PATH> "Stuff to add").value_parser(clap::value_parser!(PathBuf))
+                ),
         )
 }

@@ -47,10 +47,10 @@ fn main() {
         }
 
         Some(("add", sub_matches)) => {
-            let git_path: PathBuf =
+            let root_path: PathBuf =
                 get_current_working_dir().unwrap_or_else(|_| PathBuf::from("."));
 
-            let git_dir = git_path.join(".rugit");
+            let git_dir = root_path.join(".rugit");
 
             if git_dir.exists() {
                 let paths = sub_matches
@@ -60,7 +60,7 @@ fn main() {
                     .collect::<Vec<_>>();
                 println!("Adding {paths:?}");
 
-                let file_path = git_path.join(paths.first().expect("Path is not provided"));
+                let file_path = root_path.join(paths.first().expect("Path is not provided"));
                 match file_path.exists() {
                     true => println!("File is present sir!"),
                     false => {
