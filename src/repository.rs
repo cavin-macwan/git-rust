@@ -1,8 +1,11 @@
 use clap::ArgMatches;
 use std::fs::File;
-use std::io::Write;
+use std::io::{Write, read_to_string};
 use std::path::PathBuf;
 use std::{env, fs, io};
+
+use crate::git_object::GitObject;
+use crate::git_object::ObjectType;
 
 pub struct Repository {}
 
@@ -73,7 +76,11 @@ impl Repository {
             // check if the path we're trying to add is file or folder
             let is_file = file_path.is_file();
             match is_file {
-                true => println!("We're in the file"),
+                true => {
+                    let content = fs::read(file_path).expect("Not able to read the content");
+                    let blob = GitObject::new(ObjectType::Blob, content);
+                    println!("Ready")
+                }
                 false => println!("We're in a folder"),
             }
         } else {

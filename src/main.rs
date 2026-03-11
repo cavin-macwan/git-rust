@@ -5,6 +5,9 @@ use rust_tut::cli;
 mod repository;
 use repository::Repository;
 
+mod git_object;
+use git_object::GitObject;
+
 fn main() {
     let matches = cli().get_matches();
     let repository = Repository::new();
